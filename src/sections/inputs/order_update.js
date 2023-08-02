@@ -44,7 +44,7 @@ export const Order = ({ orderNumber }) => {
   // Function to send the POST request when the orderNumber prop changes
   useEffect(() => {
     if (orderNumber) {
-      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/update_order/`, {
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/update/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -61,6 +61,7 @@ export const Order = ({ orderNumber }) => {
         .then((data) => {
           // Use the response data to set the initial state
           setValues(data);
+          console.log(data);
         })
         .catch((error) => {
           console.log("Error:", error);

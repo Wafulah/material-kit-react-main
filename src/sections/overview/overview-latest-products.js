@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import PropTypes from 'prop-types';
+import { useRouter } from 'next/router';
 import ArrowRightIcon from '@heroicons/react/24/solid/ArrowRightIcon';
 import EllipsisVerticalIcon from '@heroicons/react/24/solid/EllipsisVerticalIcon';
 import {
@@ -21,7 +22,7 @@ import {
 export const OverviewLatestProducts = (props) => {
   const { sx } = props;
   const [products, setProducts] = useState([]);
-
+  const router = useRouter();
   useEffect(() => {
     const fetchProducts = () => {
       fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/latest-products/`)
@@ -43,7 +44,9 @@ export const OverviewLatestProducts = (props) => {
     fetchProducts();
   }, []);
   
-
+  const handleViewAll = () => {
+    router.push('/companies');
+  };
   return (
     <Card sx={sx}>
       <CardHeader title="Latest Products" />
@@ -100,18 +103,19 @@ export const OverviewLatestProducts = (props) => {
       </List>
       <Divider />
       <CardActions sx={{ justifyContent: 'flex-end' }}>
-        <Button
-          color="inherit"
-          endIcon={(
-            <SvgIcon fontSize="small">
-              <ArrowRightIcon />
-            </SvgIcon>
-          )}
-          size="small"
-          variant="text"
-        >
-          View all
-        </Button>
+      <Button
+      color="inherit"
+      endIcon={(
+        <SvgIcon fontSize="small">
+          <ArrowRightIcon />
+        </SvgIcon>
+      )}
+      size="small"
+      variant="text"
+      onClick={handleViewAll}
+    >
+      View all
+    </Button>
       </CardActions>
     </Card>
   );

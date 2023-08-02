@@ -94,14 +94,12 @@ export const HomeProduct = () => {
     // Extract the tag IDs from the selected tags
     values.tag.map((tag) => formData.append("tag", tag));
 
-    
-
-    console.log(formData);
-    console.log(formData.get("pic")); // Check the value of the 'pic' property
-    console.log(formData.get("name")); // Check the value of the 'name' property
-    console.log(formData.get("date")); // Check the value of the 'date' property
-    console.log(formData.get("featured")); // Check the value of the 'featured' property
-    console.log(formData.get("tag")); // Check the value of the 'tag' property
+    // console.log(formData);
+    // console.log(formData.get("pic")); // Check the value of the 'pic' property
+    // console.log(formData.get("name")); // Check the value of the 'name' property
+    // console.log(formData.get("date")); // Check the value of the 'date' property
+    // console.log(formData.get("featured")); // Check the value of the 'featured' property
+    // console.log(formData.get("tag")); // Check the value of the 'tag' property
 
     axios
       .post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/homes/`, formData, {
@@ -153,14 +151,21 @@ export const HomeProduct = () => {
                 flexDirection: "column",
               }}
             >
-              <Avatar
-                src={values.pic ? URL.createObjectURL(values.pic) : userss.avatar} // Display the uploaded image or the default avatar
+              <Box
                 sx={{
-                  height: 80,
-                  mb: 2,
-                  width: 80,
+                  width: 460,
+                  height: 260,
+
+                  overflow: "hidden",
+                  borderRadius: 2,
                 }}
-              />
+              >
+                <img
+                  src={values.pic ? URL.createObjectURL(values.pic) : userss.avatar} // Display the uploaded image or the default avatar
+                  alt="Avatar"
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
+              </Box>
             </Box>
           </CardContent>
           <Divider />
